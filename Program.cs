@@ -1,6 +1,39 @@
 ﻿using System.Globalization;
 
-string[] array = { "1", "2", "3", "4", "5", "6", "#", "8", "9", "10", "11", "12", "13", "14", "15", "7" };  
+string[] array = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "#", "15" };  
+
+
+bool isOrder () {
+
+	bool isOrder = true;
+	for(int i = 0; i < array.Length; i++)
+	{
+		if(i > 0)
+		{
+			if(array[i-1] == "#")
+			{
+				if (Int32.Parse(array[i]) < Int32.Parse(array[i-2]))
+				{
+					isOrder = false;
+				} 
+			} 
+
+			else
+
+			{
+				if (array[i] != "#") {
+
+                    if (Int32.Parse(array[i]) < Int32.Parse(array[i-1]))
+                    {
+                        isOrder = false;
+                    }
+
+                }
+            }
+		}
+	}
+	return isOrder;
+}
 
 void StampaArray(string[] array)
 {
@@ -59,7 +92,7 @@ do
 	number = Console.ReadLine();
 	ChangeNumber(number);
 
-} while (getIndex("#") != array.Length - 1);
+} while ((getIndex("#") != array.Length-1) | isOrder()==false);
 
 Console.WriteLine("hai vinto");
 StampaArray(array);
